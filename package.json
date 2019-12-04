@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {
-    "coverage":"nyc mocha test/**/*.spec.js",
+    "coverage": "nyc mocha test/**/*.spec.js",
     "lint": "eslint --ignore-path .gitignore . --fix",
     "pretest": "npm run lint",
     "test": "mocha --watch test/**/*.spec.js"

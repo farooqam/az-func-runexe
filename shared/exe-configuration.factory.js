@@ -1,11 +1,10 @@
-const fs = require('fs');
 const ExeConfiguration = require('./exe-configuration');
 
 class ExeConfigurationFactory {
-  create (configFilePath) {
-    const json = JSON.parse(fs.readFileSync(configFilePath));
+  create (json) {
     const exeConfiguration = new ExeConfiguration();
     exeConfiguration.cmd = json.cmd;
+    exeConfiguration.cwd = json.cwd;
 
     json.args.forEach(arg => {
       exeConfiguration.argsDictionary.push(

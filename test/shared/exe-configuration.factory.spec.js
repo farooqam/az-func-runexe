@@ -2,7 +2,6 @@
 /* eslint-disable no-undef */
 const chai = require('chai');
 const should = chai.should();
-const path = require('path');
 const ExeConfigurationFactory = require('../../shared/exe-configuration.factory');
 
 describe('ExeConfigurationFactory', () => {
@@ -13,19 +12,27 @@ describe('ExeConfigurationFactory', () => {
   });
 
   it('creates the config', () => {
-    const configFilePath = path.join(__dirname, 'config.json');
-    const config = factory.create(configFilePath);
+    const json = {
+      cmd: 'ls',
+      cwd: __dirname,
+      args: [
+        {
+          name: '-l',
+          value: ''
+        },
+        {
+          name: '-c',
+          value: ''
+        }
+      ]
+    };
 
-    config.cmd.should.eq('foo.exe');
+    const config = factory.create(json);
 
-    config.argsDictionary[0].should.deep.equal({
-      name: 'input',
-      value: 'c:\\tmp\\foo.txt'
-    });
+    config.cmd.should.eq(json.cmd);
+    config.cwd.should.eq(json.cwd);
 
-    config.argsDictionary[1].should.deep.equal({
-      name: 'output',
-      value: 'c:\\tmp\\foo.out'
-    });
+    config.argsDictionary[0].should.deep.equal(json.args[0]);
+    config.argsDictionary[1].should.deep.equal(json.args[1]);
   });
 });

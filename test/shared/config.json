@@ -1,5 +1,6 @@
 {
   "cmd":"foo.exe",
+  "cwd": "c:\\tmp",
   "args": [
     {
       "name": "input",
