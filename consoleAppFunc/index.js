@@ -1,11 +1,11 @@
-var nconf = require('nconf');
+const fs = require('fs');
 
 module.exports = async function (context, req) {
     context.log('JavaScript HTTP trigger function processed a request.');
     context.log(__dirname);
 
-    nconf.argv().env().file('config.json');
-
+    const configText = fs.readFileSync('config.json');
+    const config = JSON.parse(configText);
 
     if (req.query.name || (req.body && req.body.name)) {
         context.res = {
