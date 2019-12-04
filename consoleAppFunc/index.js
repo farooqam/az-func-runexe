@@ -1,11 +1,17 @@
-const fs = require('fs');
 const path = require('path');
+const ExeConfigurationFactory = require('../shared/exec-configuration.factory');
 
 module.exports = async function (context, req) {
     context.log('JavaScript HTTP trigger function processed a request.');
-    const currentDir = context.executionContext.functionDirectory;
-    const configText = fs.readFileSync(path.join(currentDir, 'config.json'));
-    const config = JSON.parse(configText);
+    const exeConfigurationFactory = new ExeConfigurationFactory();
+
+    const config = exeConfigurationFactory.create(
+      path.join(
+        context.executionContext.functionDirectory,
+        'config.json'
+      ));
+
+    console.log(config);
 
     if (req.query.name || (req.body && req.body.name)) {
         context.res = {
