@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {
-    "lint": "eslint --fix",
+    "lint": "eslint --ignore-path .gitignore . --fix",
+    "pretest": "npm run lint",
     "test": "echo \"No tests yet...\""
   },
   "dependencies": {},

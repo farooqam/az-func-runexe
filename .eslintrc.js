@@ -15,7 +15,5 @@ module.exports = {
     ecmaVersion: 2018
   },
   rules: {
-  },
-  files: ["consoleAppFunc/*.js", "shared/*.js"],
-  excludedFiles: "*.test.js",
+  }
 }

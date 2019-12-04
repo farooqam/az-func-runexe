@@ -1,8 +1,8 @@
 class ExeConfiguration {
-  constructor() {
-    this.cmd = '';
-    this.argsDictionary = [];
+  constructor () {
+    this.cmd = ''
+    this.argsDictionary = []
   }
 }
 
-module.exports = ExeConfiguration;
+module.exports = ExeConfiguration
