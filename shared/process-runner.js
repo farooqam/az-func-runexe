@@ -1,5 +1,5 @@
-const spawn = require('child_process').spawn;
-const path = require('path');
+const spawn = require('cross-spawn');
+// const path = require('path');
 
 class ProcessRunner {
   constructor (config) {
@@ -10,15 +10,22 @@ class ProcessRunner {
     const args = [];
 
     this._config.argsDictionary.forEach(arg => {
-      args.push(arg.key);
-      args.push(arg.value);
+      args.push(arg.name);
+
+      if (arg.value.length !== 0) {
+        args.push(arg.value);
+      }
     });
 
+    console.log(args);
     const process = spawn(
-      path.join(this.config.cwd, this._config.cmd),
-      args);
+      this._config.cmd,
+      args,
+      { cwd: this._config.cwd });
 
-    process.stdout.pipe(process.stdout);
+    process.stdout.on('data', data => console.log(data.toString()));
+    process.stderr.on('data', data => console.error(data.toString()));
+    process.on('exit', code => console.log(code));
   }
 }
 

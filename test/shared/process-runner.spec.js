@@ -2,17 +2,33 @@
 /* eslint-disable no-undef */
 const chai = require('chai');
 const should = chai.should();
-const ExecConfiguration = require('../../shared/exe-configuration');
+const ExecConfigurationFactory = require('../../shared/exe-configuration.factory');
 const ProcessRunner = require('../../shared/process-runner');
 
 describe('ProcessRunner', () => {
   it('runs the process', () => {
-    const config = new ExecConfiguration();
-    config.cmd = 'ls';
-    config.cwd = __dirname;
-    config.argsDictionary.push('-l');
-    config.argsDictionary.push('-c');
+    const factory = new ExecConfigurationFactory();
 
+    const json = {
+      cmd: 'npm',
+      cwd: __dirname,
+      args: [
+        {
+          name: 'list',
+          value: ''
+        },
+        {
+          name: '-g',
+          value: ''
+        },
+        {
+          name: '-depth',
+          value: '0'
+        }
+      ]
+    };
+
+    const config = factory.create(json);
     const runner = new ProcessRunner(config);
     runner.run();
   });
