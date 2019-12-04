@@ -1,0 +1,7 @@
+{
+  "cmd":"foo.exe --i {arg1} --o {arg2}",
+  "args": {
+    "arg1": "\"value for arg1\"",
+    "arg2": "\"value for arg2\""
+  }
+}
