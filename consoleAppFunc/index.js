@@ -1,10 +1,10 @@
 const fs = require('fs');
+const path = require('path');
 
 module.exports = async function (context, req) {
     context.log('JavaScript HTTP trigger function processed a request.');
-    context.log(__dirname);
-
-    const configText = fs.readFileSync('config.json');
+    const currentDir = context.executionContext.functionDirectory;
+    const configText = fs.readFileSync(path.join(currentDir, 'config.json'));
     const config = JSON.parse(configText);
 
     if (req.query.name || (req.body && req.body.name)) {
