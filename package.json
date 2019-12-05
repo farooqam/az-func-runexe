@@ -6,7 +6,7 @@
     "coverage": "nyc mocha test/**/*.spec.js",
     "lint": "eslint --ignore-path .gitignore . --fix",
     "pretest": "npm run lint",
-    "test": "mocha --watch test/**/*.spec.js"
+    "test": "mocha --timeout 10000 --watch test/**/*.spec.js"
   },
   "dependencies": {
     "cross-spawn": "^7.0.1"

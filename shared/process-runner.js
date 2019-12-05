@@ -1,9 +1,10 @@
 const spawn = require('cross-spawn');
-// const path = require('path');
+const EventEmitter = require('events').EventEmitter;
 
 class ProcessRunner {
   constructor (config) {
     this._config = config;
+    this.events = new EventEmitter();
   }
 
   run () {
@@ -17,15 +18,14 @@ class ProcessRunner {
       }
     });
 
-    console.log(args);
     const process = spawn(
       this._config.cmd,
       args,
       { cwd: this._config.cwd });
 
-    process.stdout.on('data', data => console.log(data.toString()));
-    process.stderr.on('data', data => console.error(data.toString()));
-    process.on('exit', code => console.log(code));
+    process.stdout.on('data', data => this.events.emit('output', data.toString()));
+    process.stderr.on('data', data => this.events.emit('error', data.toString()));
+    process.on('exit', code => console.log(this.events.emit('exit', code)));
   }
 }
 
