@@ -25,7 +25,7 @@ class ProcessRunner {
 
     process.stdout.on('data', data => this.events.emit('output', data.toString()));
     process.stderr.on('data', data => this.events.emit('error', data.toString()));
-    process.on('exit', code => console.log(this.events.emit('exit', code)));
+    process.on('exit', code => this.events.emit('exit', code));
   }
 }
 
