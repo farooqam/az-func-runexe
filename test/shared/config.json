@@ -1,0 +1,14 @@
+{
+  "cmd":"foo.exe",
+  "cwd": "c:\\tmp",
+  "args": [
+    {
+      "name": "input",
+      "value": "c:\\tmp\\foo.txt"
+    },
+    {
+      "name": "output",
+      "value": "c:\\tmp\\foo.out"
+    }
+  ]
+}
